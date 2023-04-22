@@ -29,14 +29,16 @@ function Navbar() {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex="0" className="menu menu-compact dropdown-content shadow bg-base-100 rounded-box w-52">
-                        <li className={`${location.pathname === '/' ? 'bordered' : ''} text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
+                        <li className={`${location.pathname === '/speedclicker' ? 'bordered' : ''} text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
+                        <li className={`${location.pathname === '/reactionclicker' ? 'bordered' : ''} text-white`}><Link to='/reactionclicker'>Reactionclicker</Link></li>
                     </ul>
                 </div>
                 <Link to='/' className="btn transition duration-150 ease-in-out bg-transparent border-transparent normal-case text-xl text-white hover:scale-105 hover:bg-transparent hover:border-transparent">Twäwis-Games</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu-horizontal px-1tabs">
-                    <li className={`${location.pathname === '/' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
+                    <li className={`${location.pathname === '/speedclicker' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
+                    <li className={`${location.pathname === '/reactionclicker' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/reactionclicker'>Reactionclicker</Link></li>
                 </ul>
             </div>
         </div>
