@@ -30,6 +30,7 @@ function Navbar() {
                     </label>
                     <ul tabIndex="0" className="menu menu-compact dropdown-content shadow bg-base-100 rounded-box w-52">
                         <li className={`${location.pathname === '/tictactoe' ? 'bordered' : ''} text-white`}><Link to='/tictactoe'>TicTacToe</Link></li>
+                        <li className={`${location.pathname === '/hangman' ? 'bordered' : ''} text-white`}><Link to='/hangman'>Hangman</Link></li>
                         <li className={`${location.pathname === '/speedclicker' ? 'bordered' : ''} text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
                         <li className={`${location.pathname === '/reactionclicker' ? 'bordered' : ''} text-white`}><Link to='/reactionclicker'>Reactionclicker</Link></li>
                     </ul>
@@ -39,9 +40,12 @@ function Navbar() {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu-horizontal px-1tabs">
                     <li className={`${location.pathname === '/tictactoe' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/tictactoe'>TicTacToe</Link></li>
+                    <li className={`${location.pathname === '/hangman' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/hangman'>Hangman</Link></li>
                     <li className={`${location.pathname === '/speedclicker' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/speedclicker'>Speedclicker</Link></li>
                     <li className={`${location.pathname === '/reactionclicker' ? 'tab-active' : ''} tab tab-bordered text-white`}><Link to='/reactionclicker'>Reactionclicker</Link></li>
                 </ul>
+            </div>
+            <div className="navbar-end">
             </div>
         </div>
     );
