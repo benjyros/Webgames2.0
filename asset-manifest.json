@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Webgames2.0/static/css/main.b5c48fa2.css",
-    "main.js": "/Webgames2.0/static/js/main.ba64900c.js",
+    "main.js": "/Webgames2.0/static/js/main.0fd8d1e6.js",
     "index.html": "/Webgames2.0/index.html",
     "main.b5c48fa2.css.map": "/Webgames2.0/static/css/main.b5c48fa2.css.map",
-    "main.ba64900c.js.map": "/Webgames2.0/static/js/main.ba64900c.js.map"
+    "main.0fd8d1e6.js.map": "/Webgames2.0/static/js/main.0fd8d1e6.js.map"
   },
   "entrypoints": [
     "static/css/main.b5c48fa2.css",
-    "static/js/main.ba64900c.js"
+    "static/js/main.0fd8d1e6.js"
   ]
 }
