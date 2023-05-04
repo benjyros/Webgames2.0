@@ -33,9 +33,9 @@ export default function Hangman() {
         setWordsToGuess(shuffledWordsToGuess);
         setWordIndex(0);
         setPreviousGuesses("");
+        clearCanvas();
         setWordArray(shuffledWordsToGuess[0]?.word.replace(/[a-zÄÖÜäöü]/gi, '_').split(''));
     }, []);
-
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -54,6 +54,8 @@ export default function Hangman() {
         setWordIndex(wordIndex + 1);
         setWordArray(wordsToGuess[wordIndex + 1]?.word.replace(/[a-z]/gi, '_').split(''));
         setPreviousGuesses("");
+        setWrongAnswerCount(0);
+        clearCanvas();
         setGuessing(true);
     }
 
@@ -63,7 +65,8 @@ export default function Hangman() {
         setWordIndex(0);
         setWordArray(shuffledWordsToGuess[0]?.word.replace(/[a-zÄÖÜäöü]/gi, '_').split(''));
         setPreviousGuesses("");
-
+        setWrongAnswerCount(0);
+        clearCanvas();
         setGuessing(true);
         setLastWord(false);
     }
@@ -76,8 +79,8 @@ export default function Hangman() {
         if (/^[A-Za-z]$/i.test(guess)) {
             if (!previous.includes(guess)) {
                 const count = checkGuess(guess.toUpperCase());
-
                 if (count === 0) {
+                    updateCanvas(wrongAnswerCount + 1);
                     setWrongAnswerCount(wrongAnswerCount + 1);
                 }
 
@@ -87,6 +90,7 @@ export default function Hangman() {
                     setLastWord(true);
                 }
             }
+
         }
     };
 
@@ -127,6 +131,107 @@ export default function Hangman() {
         return count;
     }
 
+    function updateCanvas(part) {
+        let myCanvas = document.getElementById("hangman-canvas");
+
+        if (myCanvas) {
+            let hangman = myCanvas.getContext("2d");
+            console.log(part);
+            switch (part) {
+                //bottom
+                case (1):
+                    console.log("h");
+                    hangman.strokeStyle = "black";
+                    hangman.lineWidth = 5;
+                    hangman.beginPath();
+                    hangman.moveTo(0, 245);
+                    hangman.lineTo(180, 245);
+                    hangman.stroke();
+                    break;
+                //pole
+                case (2):
+                    hangman.beginPath();
+                    hangman.moveTo(30, 245);
+                    hangman.lineTo(30, 5);
+                    hangman.stroke();
+                    break;
+                //top
+                case (3):
+                    hangman.beginPath();
+                    hangman.moveTo(10, 15);
+                    hangman.lineTo(120, 15);
+                    hangman.stroke();
+                    break;
+                //rope
+                case (4):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 15);
+                    hangman.lineTo(110, 30);
+                    hangman.stroke();
+                    break;
+                //head
+                case (5):
+                    hangman.beginPath();
+                    hangman.arc(110, 55, 25, 0, Math.PI * 2, true);
+                    hangman.closePath();
+                    hangman.stroke();
+                    break;
+                //spine
+                case (6):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 80);
+                    hangman.lineTo(110, 160);
+                    hangman.stroke();
+                    break;
+                //arm left
+                case (7):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 90);
+                    hangman.lineTo(90, 130);
+                    hangman.stroke();
+                    break;
+                //arm right
+                case (8):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 90);
+                    hangman.lineTo(130, 130);
+                    hangman.stroke();
+                    break;
+                //leg left
+                case (9):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 160);
+                    hangman.lineTo(90, 220);
+                    hangman.stroke();
+                    break;
+                //leg right
+                case (10):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 160);
+                    hangman.lineTo(130, 220);
+                    hangman.stroke();
+                    break;
+            }
+        }
+    }
+
+    function clearCanvas() {
+        let myCanvas = document.getElementById("hangman-canvas");
+
+        if (myCanvas) {
+            let hangman = myCanvas.getContext("2d");
+            hangman.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        }
+    }
+
+    const getCanvas = () => {
+        return (
+            <div>
+                <canvas id="hangman-canvas" />
+            </div>
+        );
+    };
+
     const getWordToGuess = wordArray.map((letter, index) => {
         return (
             <div className='text-black flex items-center justify-center rounded bg-[#eb8faf] h-9 w-9' key={index}>{letter}</div>
@@ -150,8 +255,8 @@ export default function Hangman() {
                 ) : (
                     <div className='mt-36'>
                         <div className='flex justify-center mb-8'>
-                            <div className='h-[350px] w-[250px] border-2 border-gray-400 rounded'>
-
+                            <div className='h-[250px] w-[180px] border-2 border-gray-400 rounded'>
+                                {getCanvas()}
                             </div>
                         </div>
                         <div className='flex flex-wrap w-[750px] justify-center gap-2'>
