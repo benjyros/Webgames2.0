@@ -55,7 +55,7 @@ export default function Speedclicker() {
     return (
         <section className="bg-[#fff5f8] justify-center select-none">
             <Navbar />
-            <div id="gameContent" className="flex h-screen text-center justify-center">
+            <div className="flex h-screen text-center justify-center">
                 {showBeginScreen && (
                     <div className='mt-56'>
                         <p className='mb-12 text-center text-pink-500 text-5xl'>SPEEDCLICKER</p>
@@ -98,8 +98,8 @@ export default function Speedclicker() {
                                 </div>
                             </div>
                         ) : (
-                            <div id="game">
-                                <div id="end" className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'>
+                            <div>
+                                <div className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'>
                                     <div>
                                         <img className='mb-10 mx-auto' src={finish} alt="finishflag"/>
                                         <p className='font-bold text-2xl'>You did {clicks / (timer / 1000)} clicks/s</p>
