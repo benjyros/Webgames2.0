@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import wordList from '../datas/wordlist.json';
 
 import Navbar from './Navbar';
 
 export default function Hangman() {
-    const [loading, setLoading] = useState(false);
-    
     const [showBeginScreen, setShowBeginScreen] = useState(true);
     const [guessing, setGuessing] = useState(false);
     const [lastWord, setLastWord] = useState(false);
@@ -35,9 +32,10 @@ export default function Hangman() {
         const shuffledWordsToGuess = shuffle(wordsToGuess);
         setWordsToGuess(shuffledWordsToGuess);
         setWordIndex(0);
+        setPreviousGuesses("");
+        clearCanvas();
         setWordArray(shuffledWordsToGuess[0]?.word.replace(/[a-zÄÖÜäöü]/gi, '_').split(''));
     }, []);
-
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -45,10 +43,6 @@ export default function Hangman() {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
-    }
-
-    if (loading) {
-        return <div className='flex h-screen items-center justify-center'><h1 className='text-2xl font-bold text-center'>Loading...</h1></div>;
     }
 
     function handleBeginClick() {
@@ -60,6 +54,7 @@ export default function Hangman() {
         setWordIndex(wordIndex + 1);
         setWordArray(wordsToGuess[wordIndex + 1]?.word.replace(/[a-z]/gi, '_').split(''));
         setPreviousGuesses("");
+        clearCanvas();
         setGuessing(true);
     }
 
@@ -69,19 +64,9 @@ export default function Hangman() {
         setWordIndex(0);
         setWordArray(shuffledWordsToGuess[0]?.word.replace(/[a-zÄÖÜäöü]/gi, '_').split(''));
         setPreviousGuesses("");
-
+        clearCanvas();
         setGuessing(true);
         setLastWord(false);
-    }
-
-    const getWordToGuess = () => {
-        return (
-            <div>
-                {wordArray.map((letter, index) => {
-                    return <div className='square btn' key={index}>{letter}</div>
-                })}
-            </div>
-        );
     }
 
     const handleGuess = (event) => {
@@ -92,8 +77,8 @@ export default function Hangman() {
         if (/^[A-Za-z]$/i.test(guess)) {
             if (!previous.includes(guess)) {
                 const count = checkGuess(guess.toUpperCase());
-
                 if (count === 0) {
+                    updateCanvas(wrongAnswerCount + 1);
                     setWrongAnswerCount(wrongAnswerCount + 1);
                 }
 
@@ -103,6 +88,7 @@ export default function Hangman() {
                     setLastWord(true);
                 }
             }
+
         }
     };
 
@@ -143,69 +129,173 @@ export default function Hangman() {
         return count;
     }
 
+    function updateCanvas(part) {
+        let myCanvas = document.getElementById("hangman-canvas");
+
+        if (myCanvas) {
+            let hangman = myCanvas.getContext("2d");
+            hangman.strokeStyle = "black";
+            hangman.lineWidth = 5;
+
+            console.log(part);
+            switch (part) {
+                //bottom
+                case (1):
+                    hangman.beginPath();
+                    hangman.moveTo(0, 245);
+                    hangman.lineTo(180, 245);
+                    hangman.stroke();
+                    break;
+                //pole
+                case (2):
+                    hangman.beginPath();
+                    hangman.moveTo(30, 245);
+                    hangman.lineTo(30, 5);
+                    hangman.stroke();
+                    break;
+                //top
+                case (3):
+                    hangman.beginPath();
+                    hangman.moveTo(10, 15);
+                    hangman.lineTo(120, 15);
+                    hangman.stroke();
+                    break;
+                //rope
+                case (4):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 15);
+                    hangman.lineTo(110, 30);
+                    hangman.stroke();
+                    break;
+                //head
+                case (5):
+                    hangman.beginPath();
+                    hangman.arc(110, 55, 25, 0, Math.PI * 2, true);
+                    hangman.closePath();
+                    hangman.stroke();
+                    break;
+                //spine
+                case (6):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 80);
+                    hangman.lineTo(110, 160);
+                    hangman.stroke();
+                    break;
+                //arm left
+                case (7):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 90);
+                    hangman.lineTo(90, 130);
+                    hangman.stroke();
+                    break;
+                //arm right
+                case (8):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 90);
+                    hangman.lineTo(130, 130);
+                    hangman.stroke();
+                    break;
+                //leg left
+                case (9):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 160);
+                    hangman.lineTo(90, 220);
+                    hangman.stroke();
+                    break;
+                //leg right
+                case (10):
+                    hangman.beginPath();
+                    hangman.moveTo(110, 160);
+                    hangman.lineTo(130, 220);
+                    hangman.stroke();
+                    break;
+            }
+        }
+    }
+
+    function clearCanvas() {
+        setWrongAnswerCount(0);
+        let myCanvas = document.getElementById("hangman-canvas");
+
+        if (myCanvas) {
+            let hangman = myCanvas.getContext("2d");
+            hangman.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        }
+    }
+
+    const getCanvas = () => {
+        return (
+            <div>
+                <canvas id="hangman-canvas" width="180" height="250" />
+            </div>
+        );
+    };
+
+    const getWordToGuess = wordArray.map((letter, index) => {
+        return (
+            <div className='text-black flex items-center justify-center rounded bg-[#eb8faf] h-9 w-9' key={index}>{letter}</div>
+        );
+    });
+
     return (
-        <section className="bg-[#ffe0e9] dark:bg-[#ffe0e9]">
+        <section className="bg-[#fff5f8] select-none">
             <Navbar />
-            <div id="gameContent" style={{ backgroundColor: "#eb8faf" }}>
+            <div className="flex h-screen text-center justify-center">
                 {showBeginScreen ? (
-                    <div>
-                        <div id="gameTitle">HANGMAN</div>
+                    <div className='mt-56'>
+                        <p className='mb-12 text-center text-pink-500 text-5xl'>HANGMAN</p>
                         <button
-                            id="startButton"
-                            className="btn"
+                            className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}
                         >
                             BEGIN
                         </button>
                     </div>
                 ) : (
-                    <div>
-                        <div id="drawing">
-
+                    <div className='mt-36'>
+                        <div className='flex justify-center mb-8'>
+                            <div className='flex items-center justify-center h-[260px] w-[190px] border-2 border-gray-400 rounded'>
+                                {getCanvas()}
+                            </div>
                         </div>
-                        {getWordToGuess()}
+                        <div className='flex flex-wrap w-[750px] justify-center gap-2'>
+                            {getWordToGuess}
+                        </div>
                         {guessing ? (
                             <div>
-                                <div id="hint">
+                                <p className='font-bold text-black m-8'>
                                     HINT: {wordsToGuess[wordIndex]?.clue}
-                                </div>
-                                <div id="guess">
-                                    <form className="w-40" onSubmit={handleGuess}>
-                                        <div className="grid grid-cols-2 grid-rows-2">
-                                            <div className="col-start-1 flex-col justify-center grid place-content-center">
-                                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Letter:</label>
-                                            </div>
-                                            <div className="col-start-2 flex-col justify-center grid place-content-center">
-                                                <input type="name" name="name" id="name" onChange={(e) => setGuess(e.target.value)} value={guess} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-16 h-12" required="" />
-                                            </div>
-                                            <div className="row-start-2 col-span-2 grid mt-2">
-                                                <button type="submit" className="btn">OK</button>
-                                            </div>
+                                </p>
+                                <form className='flex justify-center m-16' onSubmit={handleGuess}>
+                                    <div>
+                                        <div className='flex gap-4'>
+                                            <p className="text-black">Letter:</p>
+                                            <input className="bg-[#ffbfd5] text-center border border-gray-500 text-gray-900 rounded w-16 h-7" onChange={(e) => setGuess(e.target.value)} value={guess} required={true} />
                                         </div>
-                                    </form>
-                                </div>
-                                <div id="previousguesses">
-                                    <p>Previous guesses:</p>
-                                    <p>{previousGuesses}</p>
+                                        <button type="submit" className="btn mt-4 w-24 m-auto bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200">OK</button>
+                                    </div>
+                                </form>
+                                <div>
+                                    <p className="text-black">Previous guesses:</p>
+                                    <p className="text-black font-bold">{previousGuesses}</p>
                                 </div>
                             </div>
                         ) : (
-                            <div>
-                                {result}
+                            <div className='m-8'>
+                                <p className='text-black font-bold'>{result}</p>
                                 {lastWord ? (
                                     <div>
-                                        <button id="replay" className="btn" onClick={() => handleRestartClick()}>
+                                        <button className="btn mt-10 w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200" onClick={() => handleRestartClick()}>
                                             RESTART
                                         </button>
                                     </div>
                                 ) : (
                                     <div>
-                                        <button className="btn" onClick={() => handleContinueClick()}>
+                                        <button className="btn mt-10 w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200" onClick={() => handleContinueClick()}>
                                             CONTINUE
                                         </button>
                                     </div>
                                 )}
-
                             </div>
                         )}
                     </div>
