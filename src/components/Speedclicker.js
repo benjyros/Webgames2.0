@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import Navbar from './Navbar';
+import finish from '../images/finish.png';
 
 export default function Speedclicker() {
-    const [loading, setLoading] = useState(false);
     const [clicks, setClicks] = useState(0);
     const [showBeginScreen, setShowBeginScreen] = useState(true);
     const [showStartScreen, setShowStartScreen] = useState(false);
@@ -27,14 +26,8 @@ export default function Speedclicker() {
     useEffect(() => {
         if (countdown === 0) {
             setGameStarted(false);
-            // Timer has ended, do something here
         }
     }, [countdown]);
-
-    const navigate = useNavigate();
-    if (loading) {
-        return <div className='flex h-screen items-center justify-center'><h1 className='text-2xl font-bold text-center'>Loading...</h1></div>;
-    }
 
     function handleBeginClick() {
         setShowBeginScreen(false);
@@ -60,15 +53,14 @@ export default function Speedclicker() {
     }
 
     return (
-        <section className="bg-[#ffe0e9] dark:bg-[#ffe0e9]">
+        <section className="bg-[#fff5f8] justify-center select-none">
             <Navbar />
-            <div id="gameContent" style={{ backgroundColor: "#eb8faf" }}>
+            <div id="gameContent" className="flex h-screen text-center justify-center">
                 {showBeginScreen && (
-                    <div>
-                        <div id="gameTitle">SPEEDCLICKER</div>
+                    <div className='mt-56'>
+                        <p className='mb-12 text-center text-pink-500 text-5xl'>SPEEDCLICKER</p>
                         <button
-                            id="startButton"
-                            className="btn"
+                            className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}
                         >
                             BEGIN
@@ -76,48 +68,46 @@ export default function Speedclicker() {
                     </div>
                 )}
                 {showStartScreen && (
-                    <div>
+                    <div className='mt-36'>
                         <div
-                            id="start"
+                            className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'
                             onClick={() => handleStartClick()}
                         >
-                            <div id="startScreen">
-                                <div>
-                                    <h3>Speedclicker</h3>
-                                    <p>
-                                        As soon the screen turns to light purple, click as often as you
-                                        can.
-                                    </p>
-                                    <br />
-                                    <h5>click to start</h5>
-                                </div>
+                            <div>
+                                <p className='text-2xl font-bold'>Speedclicker</p>
+                                <p>
+                                    As soon the screen turns to light purple, click as often as you
+                                    can.
+                                </p>
+                                <br />
+                                <p className='text-xl font-bold'>click to start</p>
                             </div>
                         </div>
                     </div>
                 )}
                 {showGameScreen && (
-                    <div>
+                    <div className='mt-36'>
                         {gameStarted ? (
-                            <div id="game" onClick={() => handleGameClick()}>
-                                <div id="play">
-                                    <h4 id="countdown">Timer: {(countdown / 1000).toFixed(2)}</h4>
-                                    <h4 id="currentClicks">
+                            <div className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded' onClick={() => handleGameClick()}>
+                                <div>
+                                    <p className='font-bold text-xl'>Timer: {(countdown / 1000).toFixed(2)}</p>
+                                    <p className='font-bold text-xl'>
                                         Current clicks/s: {(clicks / (timer / 1000)).toFixed(2)}
-                                    </h4>
-                                    <h4 id="clicks">Clicks: {clicks}</h4>
+                                    </p>
+                                    <p className='font-bold text-xl'>Clicks: {clicks}</p>
                                 </div>
                             </div>
                         ) : (
                             <div id="game">
-                                <div id="end">
+                                <div id="end" className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'>
                                     <div>
-                                        <img src="../Images/finish.png" alt="" id="finishFlag" />
-                                        <h4>You did {clicks / (timer / 1000)} clicks/s</h4>
-                                        <h6>total of {clicks} clicks in 8 secs</h6>
+                                        <img className='mb-10 mx-auto' src={finish} alt="finishflag"/>
+                                        <p className='font-bold text-2xl'>You did {clicks / (timer / 1000)} clicks/s</p>
+                                        <p className='font-bold mb-3'>total of {clicks} clicks in 8 secs</p>
                                         <hr />
                                     </div>
                                 </div>
-                                <button id="replay" className="btn" onClick={() => handleRestartClick()}>
+                                <button className="btn mt-10 w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200" onClick={() => handleRestartClick()}>
                                     RESTART
                                 </button>
                             </div>
