@@ -166,7 +166,7 @@ export default function Hangman() {
                                     <div>
                                         <div className='flex gap-4'>
                                             <p className="text-black">Letter:</p>
-                                            <input className="bg-[#ffbfd5] border border-gray-500 text-gray-900 rounded w-16 h-7" onChange={(e) => setGuess(e.target.value)} value={guess} required="true" />
+                                            <input className="bg-[#ffbfd5] border border-gray-500 text-gray-900 rounded w-16 h-7" onChange={(e) => setGuess(e.target.value)} value={guess} required={true} />
                                         </div>
                                         <button type="submit" className="btn mt-4 w-24 m-auto bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200">OK</button>
                                     </div>
