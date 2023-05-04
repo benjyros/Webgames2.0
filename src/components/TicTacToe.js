@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 
 export default function TicTacToe() {
-    const [loading, setLoading] = useState(false);
     const [showBeginScreen, setShowBeginScreen] = useState(true);
     const [showRestartBtn, setShowRestartBtn] = useState(false);
 
@@ -23,10 +22,6 @@ export default function TicTacToe() {
             setStatus(`Next player: ${xIsNext ? 'X' : 'O'}`);
         }
     }, [board, xIsNext]);
-
-    if (loading) {
-        return <div className='flex h-screen items-center justify-center'><h1 className='text-2xl font-bold text-center'>Loading...</h1></div>;
-    }
 
     function handleBeginClick() {
         setShowBeginScreen(false);
@@ -49,50 +44,42 @@ export default function TicTacToe() {
         setXIsNext(!xIsNext);
     };
 
-    const renderSquare = (index) => {
+    const boxes = Array.from({ length: 9 }).map((_, index) => {
+        const boxValue = board[index];
+        const isO = boxValue === 'O';
+        const isX = boxValue === 'X';
+        const colorClass = isO ? 'text-black' : isX ? 'text-red-500' : '';
+
         return (
-            <button className="square btn" onClick={() => handleClick(index)}>
+            <div className={`flex items-center justify-center h-[200px] w-[200px] border-2 font-bold text-7xl border-black ${colorClass}`} onClick={() => handleClick(index)}>
                 {board[index]}
-            </button>
+            </div>
         );
-    };
+    });
 
     return (
-        <section className="bg-[#ffe0e9] dark:bg-[#ffe0e9]">
+        <section className="bg-[#fff5f8] justify-center select-none">
             <Navbar />
-            <div id="gameContent" style={{ backgroundColor: "#eb8faf" }}>
+            <div className="flex h-screen justify-center">
                 {showBeginScreen ? (
-                    <div>
-                        <div id="gameTitle">TICTACTOE</div>
+                    <div className='mt-56'>
+                        <p className='mb-12 text-center text-pink-500 text-5xl'>TICTACTOE</p>
                         <button
-                            id="startButton"
-                            className="btn"
+                            className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}
                         >
                             BEGIN
                         </button>
                     </div>
                 ) : (
-                    <div>
-                        <div className="board-row">
-                            {renderSquare(0)}
-                            {renderSquare(1)}
-                            {renderSquare(2)}
+                    <div className='mt-36'>
+                        <div className='grid grid-cols-3'>
+                            {boxes}
                         </div>
-                        <div className="board-row">
-                            {renderSquare(3)}
-                            {renderSquare(4)}
-                            {renderSquare(5)}
-                        </div>
-                        <div className="board-row">
-                            {renderSquare(6)}
-                            {renderSquare(7)}
-                            {renderSquare(8)}
-                        </div>
-                        <div className="status">{status}</div>
+                        <p className='text-xl text-black font-bold'>{status}</p>
                         {showRestartBtn && (
                             <div>
-                                <button id="replay" className="btn" onClick={() => handleRestartClick()}>
+                                <button className="btn mt-10 w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200" onClick={() => handleRestartClick()}>
                                     RESTART
                                 </button>
                             </div>
@@ -101,7 +88,6 @@ export default function TicTacToe() {
                 )}
             </div>
         </section>
-
     );
 }
 
