@@ -54,7 +54,6 @@ export default function Hangman() {
         setWordIndex(wordIndex + 1);
         setWordArray(wordsToGuess[wordIndex + 1]?.word.replace(/[a-z]/gi, '_').split(''));
         setPreviousGuesses("");
-        setWrongAnswerCount(0);
         clearCanvas();
         setGuessing(true);
     }
@@ -65,7 +64,6 @@ export default function Hangman() {
         setWordIndex(0);
         setWordArray(shuffledWordsToGuess[0]?.word.replace(/[a-zÄÖÜäöü]/gi, '_').split(''));
         setPreviousGuesses("");
-        setWrongAnswerCount(0);
         clearCanvas();
         setGuessing(true);
         setLastWord(false);
@@ -136,13 +134,13 @@ export default function Hangman() {
 
         if (myCanvas) {
             let hangman = myCanvas.getContext("2d");
+            hangman.strokeStyle = "black";
+            hangman.lineWidth = 5;
+
             console.log(part);
             switch (part) {
                 //bottom
                 case (1):
-                    console.log("h");
-                    hangman.strokeStyle = "black";
-                    hangman.lineWidth = 5;
                     hangman.beginPath();
                     hangman.moveTo(0, 245);
                     hangman.lineTo(180, 245);
@@ -216,6 +214,7 @@ export default function Hangman() {
     }
 
     function clearCanvas() {
+        setWrongAnswerCount(0);
         let myCanvas = document.getElementById("hangman-canvas");
 
         if (myCanvas) {
@@ -227,7 +226,7 @@ export default function Hangman() {
     const getCanvas = () => {
         return (
             <div>
-                <canvas id="hangman-canvas" />
+                <canvas id="hangman-canvas" width="180" height="250" />
             </div>
         );
     };
@@ -255,7 +254,7 @@ export default function Hangman() {
                 ) : (
                     <div className='mt-36'>
                         <div className='flex justify-center mb-8'>
-                            <div className='h-[250px] w-[180px] border-2 border-gray-400 rounded'>
+                            <div className='flex items-center justify-center h-[260px] w-[190px] border-2 border-gray-400 rounded'>
                                 {getCanvas()}
                             </div>
                         </div>
