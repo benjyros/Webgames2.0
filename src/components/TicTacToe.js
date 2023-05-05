@@ -52,7 +52,7 @@ export default function TicTacToe() {
         const colorClass = isO ? 'text-black' : isX ? 'text-red-500' : '';
 
         return (
-            <div className={`flex items-center justify-center h-[150px] w-[150px] border-2 font-bold text-6xl border-black ${colorClass}`} onClick={() => handleClick(index)}>
+            <div key={index} className={`flex items-center justify-center h-[75px] w-[75px] md:h-[100px] md:w-[100px] xl:h-[150px] xl:w-[150px] border-2 font-bold text-2xl md:text-4xl xl:text-6xl border-black ${colorClass}`} onClick={() => handleClick(index)}>
                 {board[index]}
             </div>
         );
@@ -64,7 +64,7 @@ export default function TicTacToe() {
             <div className="flex justify-center">
                 {showBeginScreen ? (
                     <div className='mt-56 h-screen'>
-                        <p className='mb-12 text-center text-pink-500 text-5xl'>TICTACTOE</p>
+                        <p className='mb-12 text-center text-pink-500 text-3xl md:text-5xl'>TICTACTOE</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}

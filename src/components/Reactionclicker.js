@@ -100,7 +100,7 @@ export default function Reactionclicker() {
             <div className="flex h-screen text-center justify-center">
                 {showBeginScreen && (
                     <div className='mt-56 h-screen'>
-                        <p className='mb-12 text-center text-pink-500 text-5xl'>REACTIONCLICKER</p>
+                        <p className='mb-12 text-center text-pink-500 text-3xl md:text-5xl'>REACTIONCLICKER</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}
@@ -112,12 +112,12 @@ export default function Reactionclicker() {
                 {showStartScreen && (
                     <div className='mt-24 mb-36'>
                         <div
-                            className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'
+                            className='justify-center text-white items-center flex h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[500px] xl:w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'
                             onClick={() => handleStartClick()}
                         >
                             <div>
                                 <img className='mb-10 mx-auto' src={window.location.origin + "/Webgames2.0/images/thunder.png"} alt='thunder' />
-                                <p className='text-2xl font-bold'>reaction time test</p>
+                                <p className='text-xl md:text-2xl font-bold'>reaction time test</p>
                                 <p>When it turns red, click as quickly as you can.</p>
                                 <p className='font-bold'>click anywhere to begin</p>
                             </div>
@@ -131,32 +131,32 @@ export default function Reactionclicker() {
                                 {isPlaying ? (
                                     <div onClick={() => handleWaitForGreenClick()}>
                                         {waitingForGreen ? (
-                                            <div className='justify-center text-white items-center bg-[#ff6363] flex h-[500px] w-[500px] border-2 border-gray-400 rounded'>
+                                            <div className='justify-center text-white items-center bg-[#ff6363] flex h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[500px] xl:w-[500px] border-2 border-gray-400 rounded'>
                                                 <div>
-                                                    <p className='text-5xl font-bold'>wait for green...</p>
+                                                    <p className='text-xl md:text-3xl xl:text-5xl font-bold'>wait for green...</p>
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className='justify-center text-white items-center bg-[#8cff8c] flex h-[500px] w-[500px] border-2 border-gray-400 rounded'>
+                                            <div className='justify-center text-white items-center bg-[#8cff8c] flex h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[500px] xl:w-[500px] border-2 border-gray-400 rounded'>
                                                 <div>
-                                                    <p className='text-5xl font-bold'>click !</p>
+                                                    <p className='text-xl md:text-3xl xl:text-5xl font-bold'>click !</p>
                                                 </div>
                                             </div>
                                         )}
                                     </div>
                                 ) : (
-                                    <div className='justify-center text-white items-center bg-[#eb8faf] flex h-[500px] w-[500px] border-2 border-gray-400 rounded' onClick={() => handleResultClick()}>
+                                    <div className='justify-center text-white items-center bg-[#eb8faf] flex h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[500px] xl:w-[500px] border-2 border-gray-400 rounded' onClick={() => handleResultClick()}>
                                         {earlyClick ? (
                                             <div>
                                                 <div>
-                                                    <p className='text-5xl font-bold'>too soon !</p>
+                                                    <p className='text-xl md:text-3xl xl:text-5xl font-bold'>too soon !</p>
                                                     <p className='font-bold'>click to try again.</p>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div>
                                                 <div>
-                                                    <p className='text-5xl font-bold'>{result} ms</p>
+                                                    <p className='text-xl md:text-3xl xl:text-5xl font-bold'>{result} ms</p>
                                                     <p className='font-bold'>click to keep going.</p>
                                                 </div>
                                             </div>
@@ -166,12 +166,12 @@ export default function Reactionclicker() {
                             </div>
                         ) : (
                             <div>
-                                <div className='justify-center text-white items-center bg-[#f5ac6c] flex h-[500px] w-[500px] border-2 border-gray-400 rounded'>
+                                <div className='justify-center text-white items-center bg-[#f5ac6c] flex h-[300px] w-[300px] md:h-[400px] md:w-[400px] xl:h-[500px] xl:w-[500px] border-2 border-gray-400 rounded'>
                                     <div>
-                                        <p className='text-xl m-2 font-bold'>your average was</p>
-                                        <p className='text-5xl m-2'>{calculateAverage()} ms</p>
+                                        <p className='md:text-xl m-2 font-bold'>your average was</p>
+                                        <p className='text-xl md:text-3xl xl:text-5xl m-2'>{calculateAverage()} ms</p>
                                         <hr className='m-2 w-64 border-0 bg-white h-[2px]' />
-                                        <p className='text-xl m-2 font-bold'>click to try again.</p>
+                                        <p className='md:text-xl m-2 font-bold'>click to try again.</p>
                                     </div>
                                 </div>
                                 <button className="btn mt-10 w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200" onClick={() => handleRestartClick()}>
