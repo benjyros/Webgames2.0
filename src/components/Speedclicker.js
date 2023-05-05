@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import finish from '../images/finish.png';
 
 export default function Speedclicker() {
     const [clicks, setClicks] = useState(0);
@@ -102,7 +101,7 @@ export default function Speedclicker() {
                             <div>
                                 <div className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'>
                                     <div>
-                                        <img className='mb-10 mx-auto' src={finish} alt="finishflag"/>
+                                        <img className='mb-10 mx-auto' src={window.location.origin + "/Webgames2.0/images/finish.png"} alt="finishflag"/>
                                         <p className='font-bold text-2xl'>You did {clicks / (timer / 1000)} clicks/s</p>
                                         <p className='font-bold mb-3'>total of {clicks} clicks in 8 secs</p>
                                         <hr />
