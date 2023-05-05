@@ -137,8 +137,7 @@ export default function Hangman() {
             let hangman = myCanvas.getContext("2d");
             hangman.strokeStyle = "black";
             hangman.lineWidth = 5;
-
-            console.log(part);
+            
             switch (part) {
                 //bottom
                 case (1):
@@ -244,7 +243,7 @@ export default function Hangman() {
             <div className="flex text-center justify-center">
                 {showBeginScreen ? (
                     <div className='mt-56 h-screen'>
-                        <p className='mb-12 text-center text-pink-500 text-5xl'>HANGMAN</p>
+                        <p className='mb-12 text-center text-pink-500 text-3xl md:text-5xl'>HANGMAN</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
                             onClick={() => handleBeginClick()}
@@ -259,7 +258,7 @@ export default function Hangman() {
                                 {getCanvas()}
                             </div>
                         </div>
-                        <div className='flex flex-wrap w-[750px] justify-center gap-2'>
+                        <div className='flex flex-wrap w-[250px] md:w-[500px] xl:w-[750px] justify-center mx-auto gap-2'>
                             {getWordToGuess}
                         </div>
                         {guessing ? (

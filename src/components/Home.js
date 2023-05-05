@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -11,7 +11,6 @@ export default function Home() {
         { webpage: "Speedclicker", description: "Klicke so schnell wie du kannst." },
         { webpage: "Reactionclicker", description: "Teste deine Reflexe." },
     ]);
-    const location = useLocation();
 
     const getLinks = webpages.map((webpage, index) => {
         const location = "/" + webpage.webpage.toLocaleLowerCase();

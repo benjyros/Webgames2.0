@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
         <footer className="footer footer-center p-10 bg-[#eb8faf] text-white border-t border-black">
             <div>
-                <div className="grid grid-flow-col gap-4">
+                <div className="grid grid-flow-row md:grid-flow-col gap-4">
                     <a href='https://github.com/benjyros' className='flex justify-center gap-2 border border-black rounded pt-1 pb-2 w-[175px] bg-[#fff5f8] text-black'>
                         Benjamin Peterhans
                         <svg
