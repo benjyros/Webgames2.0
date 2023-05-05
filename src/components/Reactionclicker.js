@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import thunder from '../images/thunder.png';
 
 export default function Reactionclicker() {
     const [showBeginScreen, setShowBeginScreen] = useState(true);
@@ -117,7 +116,7 @@ export default function Reactionclicker() {
                             onClick={() => handleStartClick()}
                         >
                             <div>
-                                <img className='mb-10 mx-auto' src={thunder} alt='thunder' />
+                                <img className='mb-10 mx-auto' src={window.location.origin + "/Webgames2.0/images/thunder.png"} alt='thunder' />
                                 <p className='text-2xl font-bold'>reaction time test</p>
                                 <p>When it turns red, click as quickly as you can.</p>
                                 <p className='font-bold'>click anywhere to begin</p>
