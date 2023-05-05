@@ -137,8 +137,7 @@ export default function Hangman() {
             let hangman = myCanvas.getContext("2d");
             hangman.strokeStyle = "black";
             hangman.lineWidth = 5;
-
-            console.log(part);
+            
             switch (part) {
                 //bottom
                 case (1):
