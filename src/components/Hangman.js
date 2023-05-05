@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import wordList from '../datas/wordlist.json';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function Hangman() {
     const [showBeginScreen, setShowBeginScreen] = useState(true);
@@ -240,9 +241,9 @@ export default function Hangman() {
     return (
         <section className="bg-[#fff5f8] select-none">
             <Navbar />
-            <div className="flex h-screen text-center justify-center">
+            <div className="flex text-center justify-center">
                 {showBeginScreen ? (
-                    <div className='mt-56'>
+                    <div className='mt-56 h-screen'>
                         <p className='mb-12 text-center text-pink-500 text-5xl'>HANGMAN</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
@@ -252,7 +253,7 @@ export default function Hangman() {
                         </button>
                     </div>
                 ) : (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         <div className='flex justify-center mb-8'>
                             <div className='flex items-center justify-center h-[260px] w-[190px] border-2 border-gray-400 rounded'>
                                 {getCanvas()}
@@ -301,6 +302,7 @@ export default function Hangman() {
                     </div>
                 )}
             </div>
+            <Footer />
         </section>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function TicTacToe() {
     const [showBeginScreen, setShowBeginScreen] = useState(true);
@@ -51,7 +52,7 @@ export default function TicTacToe() {
         const colorClass = isO ? 'text-black' : isX ? 'text-red-500' : '';
 
         return (
-            <div className={`flex items-center justify-center h-[200px] w-[200px] border-2 font-bold text-7xl border-black ${colorClass}`} onClick={() => handleClick(index)}>
+            <div className={`flex items-center justify-center h-[150px] w-[150px] border-2 font-bold text-6xl border-black ${colorClass}`} onClick={() => handleClick(index)}>
                 {board[index]}
             </div>
         );
@@ -60,9 +61,9 @@ export default function TicTacToe() {
     return (
         <section className="bg-[#fff5f8] justify-center select-none">
             <Navbar />
-            <div className="flex h-screen justify-center">
+            <div className="flex justify-center">
                 {showBeginScreen ? (
-                    <div className='mt-56'>
+                    <div className='mt-56 h-screen'>
                         <p className='mb-12 text-center text-pink-500 text-5xl'>TICTACTOE</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
@@ -72,7 +73,7 @@ export default function TicTacToe() {
                         </button>
                     </div>
                 ) : (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         <div className='grid grid-cols-3'>
                             {boxes}
                         </div>
@@ -87,6 +88,7 @@ export default function TicTacToe() {
                     </div>
                 )}
             </div>
+            <Footer />
         </section>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 import finish from '../images/finish.png';
 
 export default function Speedclicker() {
@@ -55,9 +56,9 @@ export default function Speedclicker() {
     return (
         <section className="bg-[#fff5f8] justify-center select-none">
             <Navbar />
-            <div className="flex h-screen text-center justify-center">
+            <div className="flex text-center justify-center">
                 {showBeginScreen && (
-                    <div className='mt-56'>
+                    <div className='mt-56 h-screen'>
                         <p className='mb-12 text-center text-pink-500 text-5xl'>SPEEDCLICKER</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
@@ -68,7 +69,7 @@ export default function Speedclicker() {
                     </div>
                 )}
                 {showStartScreen && (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         <div
                             className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'
                             onClick={() => handleStartClick()}
@@ -86,7 +87,7 @@ export default function Speedclicker() {
                     </div>
                 )}
                 {showGameScreen && (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         {gameStarted ? (
                             <div className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded' onClick={() => handleGameClick()}>
                                 <div>
@@ -115,6 +116,7 @@ export default function Speedclicker() {
                     </div>
                 )}
             </div>
+            <Footer />
         </section>
     );
 }

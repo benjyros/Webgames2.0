@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ export default function Home() {
             <Navbar />
             <div className="flex flex-row overflow-x-auto">
             </div>
+            <Footer />
         </section>
     );
 }

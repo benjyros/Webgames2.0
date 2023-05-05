@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 import thunder from '../images/thunder.png';
 
 export default function Reactionclicker() {
@@ -99,7 +100,7 @@ export default function Reactionclicker() {
             <Navbar />
             <div className="flex h-screen text-center justify-center">
                 {showBeginScreen && (
-                    <div className='mt-56'>
+                    <div className='mt-56 h-screen'>
                         <p className='mb-12 text-center text-pink-500 text-5xl'>REACTIONCLICKER</p>
                         <button
                             className="btn w-24 m-auto cursor-pointer bg-[#fff5f8] rounded text-center text-gray-700 hover:bg-pink-200"
@@ -110,7 +111,7 @@ export default function Reactionclicker() {
                     </div>
                 )}
                 {showStartScreen && (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         <div
                             className='justify-center text-white items-center flex h-[500px] w-[500px] bg-[#eb8faf] border-2 border-gray-400 rounded'
                             onClick={() => handleStartClick()}
@@ -125,7 +126,7 @@ export default function Reactionclicker() {
                     </div>
                 )}
                 {showGameScreen && (
-                    <div className='mt-36'>
+                    <div className='mt-24 mb-36'>
                         {gameStarted ? (
                             <div>
                                 {isPlaying ? (
@@ -182,6 +183,7 @@ export default function Reactionclicker() {
                     </div>
                 )}
             </div>
+            <Footer />
         </section>
     );
 }
